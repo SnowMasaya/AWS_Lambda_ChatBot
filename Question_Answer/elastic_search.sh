@@ -14,15 +14,17 @@
 
 # -- Body ---------------------------------------------------------
 #  SCRIPT LOGIC GOES HERE
-if [ $# -ne 1 ]; then
-    echo "$0 [KEYWORD]"
+if [ $# -ne 2 ]; then
+    echo "$0 [HOST (localhost or IP address or domain)] [KEYWORD]"
     exit 1
 fi
 
+QUERY=$1:9200/_all/_search?pretty
 DOUBLE_QUOTE="\""
-KEYWORD=${DOUBLE_QUOTE}${1}${DOUBLE_QUOTE}
+KEYWORD=${DOUBLE_QUOTE}${2}${DOUBLE_QUOTE}
+echo $HOST
 
-curl -XGET 'elasticsearch_english:9200/_all/_search?pretty' -d'
+curl -XGET $QUERY -d'
 {
   "query": {
     "bool": {
