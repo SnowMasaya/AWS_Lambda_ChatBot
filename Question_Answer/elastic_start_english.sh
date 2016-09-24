@@ -15,17 +15,17 @@ logdate ()
 
 # -- Body ---------------------------------------------------------
 #  SCRIPT LOGIC GOES HERE
-if [ $# -ne 3 ]; then
-    echo "$0 [PIPE_NUMBER] [PARALLEL_NUMBER] [IMAGE_FLAG (True or False)]"
+if [ $# -ne 4 ]; then
+    echo "$0 [PIPE_NUMBER] [PARALLEL_NUMBER] [IMAGE_FLAG (True or False)] [ELS_IMAGE_NAME]"
     exit 1
 fi
 
 # ENV Viable
 ELS_CONTAINER_NAME="elasticsearch_dialogue_english"
-ELS_IMAGE_NAME="docker_dialogue/elasticsearch_english"
 PIPE_NUMBER=$1
 PARALLEL_NUMBER=$2
 IMAGE_FLAG=$3
+ELS_IMAGE_NAME=$4
 
 # Check the Elasticsearch Container Image
 IMAGE_ID=`docker images | grep "$ELS_IMAGE_NAME" | awk '{ print $3 }' | tail -1`
