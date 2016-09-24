@@ -1,0 +1,2 @@
+# parallel --linebuffer -j 100 :::: jobs.txt
+python execute_wiki_pedia_xml_to_json.py -xml enwiki-20080103-abstract.xml -img True
