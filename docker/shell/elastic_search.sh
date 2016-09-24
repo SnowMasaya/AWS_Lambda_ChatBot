@@ -22,7 +22,7 @@ fi
 DOUBLE_QUOTE="\""
 KEYWORD=${DOUBLE_QUOTE}${1}${DOUBLE_QUOTE}
 
-curl -XGET 'elasticsearch_dialogue:9200/_all/_search?pretty' -d'
+curl -XGET 'elasticsearch_english:9200/_all/_search?pretty' -d'
 {
   "query": {
     "bool": {

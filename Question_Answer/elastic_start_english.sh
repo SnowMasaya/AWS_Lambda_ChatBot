@@ -21,11 +21,15 @@ if [ $# -ne 4 ]; then
 fi
 
 # ENV Viable
-ELS_CONTAINER_NAME="elasticsearch_dialogue_english"
+ELS_CONTAINER_NAME="elasticsearch_english"
 PIPE_NUMBER=$1
 PARALLEL_NUMBER=$2
 IMAGE_FLAG=$3
 ELS_IMAGE_NAME=$4
+
+# All docker process stop and kill
+docker stop `docker ps -aq`
+docker rm `docker ps -aq`
 
 # Check the Elasticsearch Container Image
 IMAGE_ID=`docker images | grep "$ELS_IMAGE_NAME" | awk '{ print $3 }' | tail -1`
