@@ -1,0 +1,5 @@
+---
+venv_home: "{{ home }}/venv"
+python_version: 3.4.1
+vpc_cidr: 10.128.0.0/16
+public_ip: 52.53.235.175

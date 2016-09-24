@@ -30,6 +30,8 @@ Data
 terraform.tfvars
 *.tfvars
 *.pem
+*.tfstate
+*.tfstate.*
 robohon_dev_instance.*
 robohon_dev_*
 ansible_hosts

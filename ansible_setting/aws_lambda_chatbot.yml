@@ -1,0 +1,6 @@
+---
+- name: apply development to all nodes
+  hosts: ubuntu
+  remote_user: ubuntu
+  roles:
+  - app
