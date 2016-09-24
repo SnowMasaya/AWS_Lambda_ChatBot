@@ -35,3 +35,6 @@ terraform.tfvars
 robohon_dev_instance.*
 robohon_dev_*
 ansible_hosts
+data/wiki_image
+data/wiki_image/*
+mecab*
