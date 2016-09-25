@@ -45,13 +45,15 @@ def lambda_handler(event, context):
     command_text = event['text'].replace("bot_lambda_out ", "")
 
     elasticsearch_query = make_query(command_text)
-    sysmte_output = subprocess.Popen(elasticsearch_query, shell=True, stdout=subprocess.PIPE).stdout.read()
+    try:
+        sysmte_output = subprocess.Popen(elasticsearch_query, shell=True, stdout=subprocess.PIPE).stdout.read()
+    except OSError:
+        print(OSError)
     json_data = json.loads(sysmte_output)
     if json_data['hits']['hits']:
         title = json_data['hits']['hits'][0]['_source']['title']
         abstract = json_data['hits']['hits'][0]['_source']['abstract']
         url = json_data['hits']['hits'][0]['_source']['url']
-        image = json_data['hits']['hits'][0]['_source']['image']
         return_data = title + "\n" + abstract + "\n" + url + "\n"
     else:
         return return_code("No match")

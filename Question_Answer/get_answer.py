@@ -6,7 +6,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "."))
 from os import path
 APP_ROOT = path.dirname( path.abspath( __file__ ) )
 from elasticsearch import Elasticsearch
-from elasticsearch import helpers
 
 
 class GetAnswer():
