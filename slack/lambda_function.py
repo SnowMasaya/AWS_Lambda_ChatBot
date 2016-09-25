@@ -52,6 +52,7 @@ def lambda_handler(event, context):
         abstract = json_data['hits']['hits'][0]['_source']['abstract']
         url = json_data['hits']['hits'][0]['_source']['url']
         image = json_data['hits']['hits'][0]['_source']['image']
+        return_data = title + "\n" + abstract + "\n" + url + "\n"
     else:
         return return_code("No match")
 
@@ -61,7 +62,7 @@ def lambda_handler(event, context):
             image_list.append(hit_data['_source']['image'])
 
     if image_list:
-        return return_code(random.choice(image_list))
+        return return_code(return_data + random.choice(image_list))
 
     if json_data['hits']['hits']:
-        return return_code(url)
+        return return_code(return_data)
