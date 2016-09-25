@@ -39,3 +39,4 @@ data/wiki_image
 data/wiki_image/*
 mecab*
 mysql_info.yml
+*.yml
