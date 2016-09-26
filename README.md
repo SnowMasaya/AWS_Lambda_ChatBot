@@ -129,6 +129,8 @@ python execute_wiki_pedia_xml_to_json.py -xml enwiki-20080312-abstract.xml -img 
 ### Usage 
 #
 
+#### Local Setting
+
 If you already prepare the json data set, you move the json data the below folder
 
 ```
@@ -152,6 +154,17 @@ You run the vagrant
 
 ```
 vagrant up
+```
+
+Docker install process below
+
+https://docs.docker.com/engine/installation/linux/ubuntulinux/
+
+If you use the setting the ansible you execute the below command
+
+```
+cd {your git clone folder}/ansible_setting
+ansible-playbook -i vagrant_host vagrant_lambda_docker.yml
 ```
 
 Build the docker image
@@ -183,10 +196,80 @@ example)
 sh elastic_start_english.sh 1 5 True elasticsearch_english
 ```
 
+You have to push the container your docker hub
+
+```
+docker login
+docker tag elasticsearch_english:latest {your docker repository name}:{tag name}
+docker push {your docker repository name}:{tag name}
+```
+
+#### Instance Setting
+
+You create the instance
+Amazon Machine Image (AMI): Ubuntu
+Choose an Instance Type:t2.micro
+Security Groups:you have to open the 9200 port for the elasticsearch
+
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
+
+If you use the terraform, you execute the below command
+
+```
+cd {your git clone folder}/terraform
+terraform plan
+terraform apply
+```
+
+Docker enviroment setting
+
+https://docs.docker.com/engine/installation/linux/ubuntulinux/
+
+If you use the setting the ansible you execute the below command
+you edit the ip address your instance `aws_lambda_chatbot_host`
+
+```
+cd {your git clone folder}/ansible_setting
+ansible-playbook -i aws_lambda_chatbot_host aws_lambda_chatbot.yml
+```
+
+Access the instance
+
+```
+ssh -i {your key} ubuntu@{your ip address}
+```
+
+You get the docker image
+
+```
+docker login
+docker pull {your docker repository name}:{tag name}
+```
+
+You get the elasticsearch start command
+
+```
+git clone https://github.com/SnowMasaya/AWS_Lambda_ChatBot.git
+```
+
+You execute the below command
+It is confirm the elasticsearch container is runnning
+
+```
+cd {your git clone folder}/Question_Answer
+sh elastic_start_english.sh [PIPE_NUMBER] [PARALLEL_NUMBER] [IMAGE_FLAG (True or False)] [ELS_IMAGE_NAME]
+example)
+sh elastic_start_english.sh 1 5 True elasticsearch_english
+```
+
+#
+### Lambda Setting
+#
+
 If you use the Lambda for slack bot, you read the below link.
 I explain the how to use the lambda function for slack bot.
 
-http:
+http://qiita.com/GushiSnow/private/0f69cab874aa8ea4a859
 
 #
 ### Code Directory Structure 
