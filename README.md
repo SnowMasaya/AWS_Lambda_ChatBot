@@ -26,6 +26,10 @@ You install the MySQL
 
    https://www.tutorialspoint.com/mysql/mysql-installation.htm
 
+You install the Vagrant
+
+   https://www.vagrantup.com/docs/installation/
+
 If you make the data set fastest, you install the parallel
 
    https://www.gnu.org/software/parallel/
@@ -37,7 +41,6 @@ Python Versions below
 ```
 Python 3.5.0
 ```
-
 
 Python Library install
 
@@ -128,10 +131,75 @@ python execute_wiki_pedia_xml_to_json.py -xml enwiki-20080312-abstract.xml -img 
 
 If you already prepare the json data set, you move the json data the below folder
 
+```
+mkdir -p {your git clone folder}/docker/data/wiki_image
+mv {your git clone folder}/Data/wiki_image/*.json {your git clone folder}/docker/data/wiki_image
+```
+
+You conpress the data
+
+```
+gzip {your git clone folder}/docker/data/wiki_image/*.json
+```
+
+You have to set the ip address
+
+```
+  config.vm.network "private_network", ip: "192.168.33.xx"
+```
+
+You run the vagrant
+
+```
+vagrant up
+```
+
+Build the docker image
+
+```
+cd /home/vagrant/AWS_Lambda_Chatbot/docker
+make test-elasticsearch-english
+```
+
+Escape the docker container
+
+```
+exit
+```
+
+Tag the docker image
+Because it is easy to understand the container mean
+
+```
+docker tag {docker elasticsearch image} elasticsearch_english
+```
+
+You start the elasticsearch container and regist data
+
+```
+cd {your git clone folder}/Question_Answer
+sh elastic_start_english.sh [PIPE_NUMBER] [PARALLEL_NUMBER] [IMAGE_FLAG (True or False)] [ELS_IMAGE_NAME]
+example)
+sh elastic_start_english.sh 1 5 True elasticsearch_english
+```
+
+If you use the Lambda for slack bot, you read the below link.
+I explain the how to use the lambda function for slack bot.
+
+http:
 
 #
 ### Code Directory Structure 
 #
+
+```
+AWS Lambda Chat Bot Hackthon
+  - Question_Answer/　　　　... Question and Answer code
+  - slack/　　　　　        ... Lambda function code for slack bot
+  - docker/　　　　         ... Setting the container
+  - ansible_setting/　　　　... Setting the environment code
+  - terraform/　　　　      ... Create the instance
+```
 
 #
 ### Licence
