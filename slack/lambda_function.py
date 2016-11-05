@@ -18,7 +18,7 @@ def make_query(keyword):
     :return (string): elasticsearch search query
     """
     # Simple Query
-    query = "curl -XGET 52.69.244.7:9200/_all/_search?pretty -d\'"
+    query = "curl -XGET {your endpoint}:9200/_all/_search?pretty -d\'"
     make_query_before = '{ "query": { "match" : { "title": { "query": '
     query_keyword = "\"" + keyword + "\""
     make_query_after = "} } } }\'"
